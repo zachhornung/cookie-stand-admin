@@ -1,82 +1,88 @@
 import Head from 'next/head'
+import { useState } from 'react'
 
 export default function Home() {
+  const [location, setLocation] = useState('');
+  const [max, setMax] = useState('');
+  const [min, setMin] = useState('');
+  const [avg, setAvg] = useState('');
+  
+  const handleSubmit = (evt) => {
+      evt.preventDefault();
+  }
+  const info = `location: ${location}, minCustomers: ${min}, maxCustomers: ${max}, avgCookies: ${avg}`
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <body>
+      <Header/>
+      <main className='h-96 mx-auto'>
+      <div className='h-88 mx-auto flex'>
+        <Form onSubmit={handleSubmit} loc={setLocation} setMin={setMin} setMax={setMax} setAvg={setAvg} />
+      </div>
+      <ReportTable className='text-center'/>
+      <Info info={info}/>
+    </main>
+      <Footer/>
+    </body>
+    
+  )
+}
+function Form(props){
+  return (
+    <form onSubmit={props.handleSubmit} className='justify-center h-168 bg-green-300 p-2 mx-10 my-5 rounded'>
+      <div>
+        <h2 className='min-w-full text-center mx-auto p-2'>
+          Create Cookie Stand
+        </h2>
+        <div className='flex m-2'>
 
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
-          </code>
-        </p>
-
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          <label for='location' className='mx-2'>Location</label>
+          <input name='location' type='text' className='flex-auto' onChange={e => props.loc(e.target.value)}/>
         </div>
-      </main>
+        <div className='flex py-10 mx-1 items-center'>
+          <div className='flex'>
+            <div className='justify-items-start'>
+              <label for='min' className='py-10'>Minimum Customers Per Hour</label>
+              <input name='min' type='number' className='mx-1' onChange={e => props.setMin(e.target.value)}/>
+            </div>
+            <div>
+              <label for='max'>Maxinum Customers Per Hour</label>
+              <input name='max' type='number' className='mx-1' onChange={e => props.setMax(e.target.value)}/>
+            </div>
+            <div>
+              <label for='avg'>Average Cookies per Sale</label>
+              <input name='avg' type='number' className='mx-1' onChange={e => props.setAvg(e.target.value)}/>
+            </div>
+          </div>
+          <button className='w-48 h-20 bg-green-500'>Create</button>
+        </div>
+      </div>
+    </form>
+  )
+}
 
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer>
-    </div>
+
+function Header(){
+  return (
+    <header className='text-4xl p-4 bg-green-400'>Cookie Stand Admin</header>
+  )
+  
+}
+
+
+
+function Footer(){
+  return (
+    <footer className='text-xs p-4 bg-green-400'>&copy; 2021</footer>
+  )
+}
+
+function ReportTable(){
+  return (
+    <h1>Report Table Coming Soon .....</h1>
+  )
+}
+function Info({info}){
+  return (
+    <h2>{info}</h2>
   )
 }
