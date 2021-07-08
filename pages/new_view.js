@@ -17,13 +17,13 @@ export default function BabyGoatsHomeAkaTheFarm(){
 function Spinny_circles(){
   return (
     <div className='bg-green-300 flex h-1/2 flex-wrap w-full'>
-      <div className='bg-red-600 animate-spin rounded-full w-20 h-20 text-center'>BABY</div>
-      <div className='bg-red-700 animate-spin rounded-full w-20 h-20 text-center'>GOATS</div>
-      <div className='bg-gradient-to-r from-green-400 to-blue-500 animate-spin rounded-full w-20 h-20 text-center'>BABY</div>
-      <div className='bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 animate-spin rounded-full w-20 h-20 text-center'>GOATS</div>
-      <div className='bg-gradient-to-r from-green-400 to-blue-500 animate-spin rounded-full w-20 h-20 text-center'>BABY</div>
-      <div className='bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 animate-spin rounded-full w-20 h-20 text-center'>GOATS</div>
-      <div className='bg-gradient-to-r from-green-400 to-blue-500 animate-spin rounded-full w-20 h-20 text-center'>AND SOME PIGS</div>
+      <div className=' text-white bg-gradient-to-r from-green-400 via-purple-500 to-blue-500 hover:from-pink-500 hover:to-yellow-500 animate-spin rounded-full w-20 h-20 text-center'>BABY</div>
+      <div className='text-white bg-gradient-to-r from-green-400 via-purple-500 to-blue-500 hover:from-pink-500 hover:to-yellow-500 animate-spin rounded-full w-20 h-20 text-center'>GOATS</div>
+      <div className='text-white bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 animate-spin rounded-full w-20 h-20 text-center'>BABY</div>
+      <div className='text-white bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 animate-spin rounded-full w-20 h-20 text-center'>GOATS</div>
+      <div className='text-white bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 animate-spin rounded-full w-20 h-20 text-center'>BABY</div>
+      <div className='text-white bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 animate-spin rounded-full w-20 h-20 text-center'>GOATS</div>
+      <div className='text-white bg-gradient-to-r from-green-400 via-purple-500 to-blue-500 hover:from-pink-500 hover:to-yellow-500 animate-spin rounded-full w-20 h-20 text-center'>AND SOME PIGS</div>
     </div>
   )
 }
