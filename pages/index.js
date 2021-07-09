@@ -1,32 +1,51 @@
-import Head from 'next/head'
 import { useState } from 'react'
-import Header from '../components/header'
-import Footer from '../components/footer'
-import Main from '../components/main'
+import LoginForm from '../components/login-form'
+import CookieStandAdmin from '../components/cookie-stand-admin'
+import { fetcher } from '../services/data-fetcher.js'
 
 export default function Home() {
 
-  const [stand, setStand] = useState([]);
+    const [loggedIn, setLoggedIn] = useState(false);
 
-  function submitHandler(event) {
-    event.preventDefault();
-    const standInfo = {};
-    standInfo.location = event.target.location.value;
-    standInfo.minCustomers = parseInt(event.target.minCustomers.value);
-    standInfo.maxCustomers = parseInt(event.target.maxCustomers.value);
-    standInfo.avgCookies = parseFloat(event.target.avgCookies.value);
+    const [username, setUsername] = useState('');
 
-    setStand([...stand, standInfo]);
-  }
+    const [cookieStandHook, setCookieStandHook] = useState();
 
-  return (
-    <div>
-        <Head>
-            <title>Cookie Stand Admin</title>
-        </Head>
-      <Header/>
-      <Main submitHandler={submitHandler} stand={stand}/>
-      <Footer/>
-    </div>
-  )
+    const [error, setError] = useState()
+
+    async function loginHandler(values) {
+
+        try {
+
+            setUsername(values.username);
+
+            const hooks = await fetcher(values);
+
+            setCookieStandHook(hooks);
+
+            setLoggedIn(true);
+
+            setError(null);
+
+        } catch (err) {
+
+            console.error(err);
+            setError(err);
+        }
+    }
+
+    function logoutHandler() {
+        setLoggedIn(false);
+        setCookieStandHook(null);
+        setError(null);
+        setUsername('');
+    }
+
+    if (!loggedIn) return <LoginForm onSubmit={loginHandler} error={error} />
+
+    return <CookieStandAdmin
+        useCookieStands={cookieStandHook.useCookieStands}
+        onLogout={logoutHandler}
+        username={username}
+    />
 }
